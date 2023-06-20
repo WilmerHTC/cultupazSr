@@ -63,12 +63,12 @@ app.get("/", (req, res) => {
   res.json("probando la ruta de inicio de mi app.");
 });
 
-dbconnection.connect((error) => {
-  if (error) {
-    throw error;
-  }
-  console.log("Conectado a la base de datos Cultupaz");
-});
+// dbconnection.connect((error) => {
+//   if (error) {
+//     throw error;
+//   }
+//   console.log("Conectado a la base de datos Cultupaz");
+// });
 
 // router.get("/api/get", getController);
 // router.post("/api/endpoint", uploadController);
