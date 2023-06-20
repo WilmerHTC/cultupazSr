@@ -60,7 +60,7 @@ app.use(
 app.use(express.static("guardar"));
 
 app.get("/", (req, res) => {
-  res.json("probando la ruta de inicio de mi app.");
+  res.json("probando la ruta de inicio de mi aplicacioó.");
 });
 
 // dbconnection.connect((error) => {
