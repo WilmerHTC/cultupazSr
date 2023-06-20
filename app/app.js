@@ -1,4 +1,4 @@
-import express from "express"
+import express from "express";
 import cors from "cors";
 import multer from "multer";
 import session from "express-session";
@@ -42,7 +42,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 // Configurar node procesar datos registro de datos y login enviados dese un form.
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -56,8 +56,12 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24,
     },
   })
-)
+);
 app.use(express.static("guardar"));
+
+app.get("/", (req, res) => {
+  res.json("probando la ruta de inicio de mi app.");
+});
 
 dbconnection.connect((error) => {
   if (error) {
@@ -76,10 +80,6 @@ app.use(registrosApp);
 app.use(usuarios);
 app.use(solicitudes);
 app.use(gestor);
-
-app.get("/", (req, res) => {
-  res.json("Ruta de inicio de mi app.");
-});
 
 // Ruta GET para obtener los datos
 app.get("/api/get", getController);
