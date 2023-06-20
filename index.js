@@ -1,9 +1,7 @@
+import { PORT } from "./app/config.js";
 import app from "./app/app.js";
-import env from "dotenv";
 
-env.config({ path: "./env/.env" });
-
-const port = process.env.PORT || 7000;
+const port = process.env.PORT || PORT;
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
 });

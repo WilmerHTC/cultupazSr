@@ -1,5 +1,4 @@
-import express from "express";
-import env from "dotenv";
+import express from "express"
 import cors from "cors";
 import multer from "multer";
 import session from "express-session";
@@ -40,11 +39,7 @@ import solicitudes from "../app/routes/admin.routes.js";
 
 // Mi app principal
 const app = express();
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+app.use(cors());
 app.use(express.json());
 // Configurar node procesar datos registro de datos y login enviados dese un form.
 app.use(express.urlencoded({ extended: true }));
@@ -61,10 +56,8 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24,
     },
   })
-);
-
-// SETEAMOS LAS VARIABLES DE ENTORNO.
-env.config({ path: "./env/.env" });
+)
+app.use(express.static("guardar"));
 
 dbconnection.connect((error) => {
   if (error) {
@@ -82,16 +75,14 @@ const __dirname = dirname(__filename);
 app.use(registrosApp);
 app.use(usuarios);
 app.use(solicitudes);
-app.use(gestor)
-
-app.use(express.static("guardar"));
-
-// Ruta GET para obtener los datos
-app.get("/api/get", getController);
+app.use(gestor);
 
 app.get("/", (req, res) => {
   res.json("Ruta de inicio de mi app.");
 });
+
+// Ruta GET para obtener los datos
+app.get("/api/get", getController);
 
 // Ruta DELETE para eliminar los datos
 app.delete("/api/endpoint", (req, res) => {
