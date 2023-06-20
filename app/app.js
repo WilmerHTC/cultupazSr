@@ -63,6 +63,9 @@ app.use(
   })
 );
 
+// SETEAMOS LAS VARIABLES DE ENTORNO.
+env.config({ path: "./env/.env" });
+
 dbconnection.connect((error) => {
   if (error) {
     throw error;
@@ -79,9 +82,7 @@ const __dirname = dirname(__filename);
 app.use(registrosApp);
 app.use(usuarios);
 app.use(solicitudes);
-app.use(gestor);
-// SETEAMOS LAS VARIABLES DE ENTORNO.
-env.config({ path: "./env/.env" });
+app.use(gestor)
 
 app.use(express.static("guardar"));
 
